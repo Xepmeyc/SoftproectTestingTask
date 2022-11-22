@@ -4,13 +4,24 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import {NavLink} from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+import {FC} from "react";
 
-//Сделать массив {}-ов для Navlink
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = [{
+    name: "Posts",
+    link: "posts"
+}, {
+    name: "Albums",
+    link: "albums"
+}, {
+    name: "Todo",
+    link: "todo"
+}];
 
-export const Header = () => {
+export const Header: FC = () => {
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box className="header" sx={{ display: 'flex' }}>
             <AppBar component="nav">
                 <Toolbar>
                     <Typography
@@ -18,14 +29,15 @@ export const Header = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        MUI
+                        <NavLink  to="/"> <HomeIcon fontSize="large" /></NavLink>
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            //Заменить Button на Navlink
-                            <Button key={item} sx={{ color: '#fff' }}>
-                                {item}
-                            </Button>
+                            <NavLink key={item.name} to={item.link}>
+                                <Button sx={{ color: '#fff' }}>
+                                    {item.name}
+                                </Button>
+                            </NavLink>
                         ))}
                     </Box>
                 </Toolbar>
