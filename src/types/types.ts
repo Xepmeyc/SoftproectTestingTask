@@ -12,3 +12,9 @@ export interface IComment {
     email: string
     body: string
 }
+
+export interface INewPost {
+    userId: number
+    title: string
+    body: string
+}

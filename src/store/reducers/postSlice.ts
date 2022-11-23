@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPost} from "../../types/types";
 
 interface PostState {
@@ -29,5 +29,22 @@ export const postSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        postLoading: (state) => {
+            state.loading = true;
+        },
+        addingPost: (state, action) => {
+            state.posts.unshift(action.payload);
+            state.loading = false;
+        },
+        changingPost: (state, action) => {
+            state.posts = state.posts.map(post => {
+                if (post.id === action.payload.id){
+                    return action.payload;
+                }
+
+                return post;
+            });
+            state.loading = false;
+        }
     },
 })

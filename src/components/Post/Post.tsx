@@ -8,8 +8,15 @@ import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import {IPost} from "../../types/types";
 import {NavLink, Outlet} from "react-router-dom";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {deletePosts} from "../../store/actionCreators/posts";
 
 export const Post: FC<{post: IPost, postId: string | undefined}> = ({post, postId}) => {
+    const dispatch = useAppDispatch();
+
+    const deletePost = () => {
+        dispatch(deletePosts(post.id));
+    }
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -21,13 +28,14 @@ export const Post: FC<{post: IPost, postId: string | undefined}> = ({post, postI
                 </Typography>
             </CardContent>
             <CardActions>
-                {postId
-                    ? <NavLink to="/posts" >
-                            <Button size="small">Learn More</Button>
-                      </NavLink>
-                    : <NavLink to={post.id.toString()}>
-                        <Button size="small">Learn More</Button>
-                    </NavLink>}
+                <NavLink to = {postId? "/posts" : post.id.toString()}>
+                    <Button size="small">Learn More</Button>
+                </NavLink>
+
+                <NavLink to ={`/edit/${post.id}`}>
+                    <Button size="small">Edit</Button>
+                </NavLink>
+                <Button onClick={deletePost} size="small">Delete</Button>
             </CardActions>
             {post.id.toString() === postId? <Outlet />: ""}
         </Card>

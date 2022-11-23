@@ -9,7 +9,7 @@ import {IComment} from "../../types/types";
 export const Comment: FC<{comment: IComment}> = ({comment}) => {
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card className="comment" sx={{ maxWidth: 345 }}>
             <CardHeader
                 title={comment.name}
                 subheader={comment.email}

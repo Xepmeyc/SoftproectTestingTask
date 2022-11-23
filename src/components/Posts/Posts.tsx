@@ -7,7 +7,9 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
+import Button from "@mui/material/Button";
+
 
 export const Posts: FC = () => {
     const {posts,loading,error} = useAppSelector(state => state.posts);
@@ -35,6 +37,9 @@ export const Posts: FC = () => {
 
     return (
         <div>
+            <Button variant="contained">
+                <NavLink to="/create"> New Post </NavLink>
+            </Button>
             {posts.map((post) => {
                 return <Post key={post.id} post={post} postId={postId}/>
             })}
