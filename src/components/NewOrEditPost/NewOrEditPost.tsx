@@ -12,7 +12,6 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Alert from "@mui/material/Alert";
 import {useParams} from "react-router-dom";
 
-
 export const NewOrEditPost: FC = () => {
     const newPost:INewPost = {
         userId: Date.now(),
@@ -20,16 +19,15 @@ export const NewOrEditPost: FC = () => {
         body: ""
     }
 
+    const [title, setTitle] = React.useState('');
+    const [body, setBody] = React.useState('');
+
     const {id} = useParams();
 
     const dispatch = useAppDispatch();
     const {loading, error, posts} = useAppSelector(state => state.posts);
 
-    const currentPost: IPost | undefined = posts.find(post => {
-        if (post.id.toString() === id){
-            return post
-        }
-    })
+    const currentPost = posts.find(post => post.id.toString() === id);
 
 
     useEffect(() => {
@@ -39,8 +37,6 @@ export const NewOrEditPost: FC = () => {
 
     },[]);
 
-    const [title, setTitle] = React.useState('');
-    const [body, setBody] = React.useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "title") {
@@ -49,7 +45,6 @@ export const NewOrEditPost: FC = () => {
         }
 
         setBody(event.target.value);
-
     };
 
     const createNewPost = () => {
@@ -71,7 +66,6 @@ export const NewOrEditPost: FC = () => {
 
     }
 
-
     const clearPost = () => {
         setBody("");
         setTitle("");
@@ -82,7 +76,6 @@ export const NewOrEditPost: FC = () => {
             setBody(currentPost.body);
             setTitle(currentPost.title);
         }
-
     }
 
     return (

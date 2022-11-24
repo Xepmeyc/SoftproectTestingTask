@@ -12,3 +12,100 @@ body{
     margin-top: 10px;
     margin-bottom: 20px;
 }
+.navLink{
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+}
+.album{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    border-radius: 15px;
+}
+
+#basic-button{
+    display: flex;
+    margin-left: 40%;
+    margin-bottom: 20px;
+}
+/*---------------------------------------------------------------------------------------------------------*/
+.slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* DOTS */
+    /* ARROWS */
+}
+.slider .slide-list {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+.slider .slide-list .slide {
+    flex: 1 0 100%;
+    position: relative;
+}
+.slider .slide-list .slide .slide-image {
+    display: flex;
+    margin: 0 auto;
+    max-height: 300px;
+    width: 100%;
+    object-fit: contain;
+}
+.slider .slide-list .slide .slide-title {
+    text-align: center;
+    margin-top: 10px;
+}
+.slider .dots {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+.slider .dots .dot {
+    background-color: #e7e7e7;
+    border-radius: 5px;
+    height: 10px;
+    margin: 5px;
+    width: 10px;
+}
+.slider .dots .dot:hover {
+    cursor: pointer;
+}
+.slider .dots .dot.selected {
+    background-color: green;
+}
+.slider .arrows {
+    color: white;
+    display: flex;
+    font-size: 30px;
+    justify-content: space-between;
+    height: 100%;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    z-index: 1;
+}
+.slider .arrows .arrow {
+    height: 30px;
+    width: 30px;
+}
+.slider .arrows .arrow:hover {
+    cursor: pointer;
+}
+.slider .arrows .arrow.left {
+    color: black;
+    margin-left: 5px;
+}
+.slider .arrows .arrow.right {
+    color: black;
+    margin-right: 5px;
+}

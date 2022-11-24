@@ -8,7 +8,7 @@ export const loadPosts = (isNoReloading = true) => {
     const {startLoading, successLoading, failLoading} = postSlice.actions;
     return async (dispatch) => {
         try {
-            const posts = store.getState().posts.posts;
+            const {posts} = store.getState().posts;
 
             if (isNoReloading && posts.length){
                 return
@@ -16,6 +16,7 @@ export const loadPosts = (isNoReloading = true) => {
 
             dispatch(startLoading());
             const response = await instance.get("/posts");
+            console.log("Loading posts");
             dispatch(successLoading(response.data));
         }catch (error){
             dispatch(failLoading(error.message));

@@ -8,6 +8,8 @@ import {store} from "./store";
 import {Provider} from "react-redux";
 import {Comments} from "./components/Comments/Comments";
 import {NewOrEditPost} from "./components/NewOrEditPost/NewOrEditPost";
+import {AlbumsPage} from "./pages/AlbumsPage";
+import {Slider} from "./components/Slider/Slider";
 
 
 export const App = () => {
@@ -23,6 +25,8 @@ export const App = () => {
                         </Route>
                         <Route path="/create" element={<NewOrEditPost/>}/>
                         <Route path="/edit/:id" element={<NewOrEditPost/>}/>
+                        <Route path="/albums" element={<AlbumsPage />}/>
+                        <Route path="/albums/:albumId" element={<Slider/>}/>
                     </Routes>
                 </Layout>
             </Provider>

@@ -6,7 +6,7 @@ export const loadComments = (postId) => {
     const {startLoading, successLoading, failLoading} = commentsSlice.actions;
     return async (dispatch) => {
         try {
-            const comments = store.getState().comments.comments;
+            const {comments} = store.getState().comments;
             const isCommentsLoaded = comments.some(comment => comment.postId.toString() === postId);
 
             if (comments.length && isCommentsLoaded){
@@ -14,6 +14,7 @@ export const loadComments = (postId) => {
             }
             dispatch(startLoading());
             const response = await instance.get(`/posts/${postId}/comments`);
+            console.log("Loading comments")
             dispatch(successLoading(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
