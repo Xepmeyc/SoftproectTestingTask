@@ -24,13 +24,11 @@ export const loadPosts = (isNoReloading = true) => {
     }
 }
 export const deletePosts = (postId: number) => {
-    const {failLoading} = postSlice.actions;
+    const {failLoading, postDeleting} = postSlice.actions;
     return async (dispatch) => {
         try {
-            const response = await instance.delete(`/posts/${postId}`);
-            if (response.data){
-                dispatch(loadPosts(false))
-            }
+            await instance.delete(`/posts/${postId}`);
+            dispatch(postDeleting(postId))
         }catch (error){
             dispatch(failLoading(error.message));
 
@@ -39,13 +37,13 @@ export const deletePosts = (postId: number) => {
 }
 
 export const addPost = (newPost:INewPost) => {
-    const {addingPost, failLoading, postLoading} = postSlice.actions;
+    const {postAdding, failLoading, postLoading} = postSlice.actions;
 
     return async (dispatch) => {
         try {
             dispatch(postLoading());
             const response = await instance.post("/posts",JSON.stringify(newPost));
-            dispatch(addingPost(response.data));
+            dispatch(postAdding(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
         }
@@ -53,13 +51,13 @@ export const addPost = (newPost:INewPost) => {
 }
 
 export const changePost = (changedPost:IPost) => {
-    const {changingPost, failLoading, postLoading} = postSlice.actions;
+    const {postChanging, failLoading, postLoading} = postSlice.actions;
 
     return async (dispatch) => {
         try {
             dispatch(postLoading());
             const response = await instance.put(`/posts/${changedPost.id}`,JSON.stringify(changedPost));
-            dispatch(changingPost(response.data));
+            dispatch(postChanging(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
         }

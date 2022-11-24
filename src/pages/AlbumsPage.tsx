@@ -43,11 +43,11 @@ export const AlbumsPage = () => {
                         <Grid key={album.id} item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} minHeight={160}>
                             <NavLink className="navLink" to={`/albums/${album.id.toString()}`}>
                                 <div
-                                    style={
+                                    /*style={
                                         {
                                             backgroundColor: '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase()
                                         }
-                                    }
+                                    }*/
                                      className="album"
                                 >
                                     {album.title}

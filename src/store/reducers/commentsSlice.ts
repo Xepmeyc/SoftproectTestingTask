@@ -29,5 +29,9 @@ export const commentsSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        commentDeleting: (state, action) => {
+            state.comments = state.comments.filter(comment => comment.id !== action.payload);
+            state.loading = false;
+        },
     },
 })

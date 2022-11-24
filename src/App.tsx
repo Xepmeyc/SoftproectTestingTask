@@ -20,9 +20,8 @@ export const App = () => {
                 <Layout>
                     <Routes>
                         <Route index element={<HomePage/>}/>
-                        <Route path="/posts" element={<Posts/>}>
-                            <Route path = ":postId" element={<Comments/>}/>
-                        </Route>
+                        <Route path="/posts" element={<Posts/>}/>
+                        <Route path = "posts/:postId" element={<Comments/>}/>
                         <Route path="/create" element={<NewOrEditPost/>}/>
                         <Route path="/edit/:id" element={<NewOrEditPost/>}/>
                         <Route path="/albums" element={<AlbumsPage />}/>

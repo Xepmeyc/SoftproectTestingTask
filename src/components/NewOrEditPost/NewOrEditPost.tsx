@@ -35,7 +35,7 @@ export const NewOrEditPost: FC = () => {
 
         setInitialState();
 
-    },[]);
+    },[currentPost]);
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

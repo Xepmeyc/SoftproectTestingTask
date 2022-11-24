@@ -41,7 +41,7 @@ export const Posts: FC = () => {
                 <NavLink to="/create"> New Post </NavLink>
             </Button>
             {posts.map((post) => {
-                return <Post key={post.id} post={post} postId={postId}/>
+                return <Post key={post.id} post={post} postId={postId} isOpen={false}/>
             })}
         </div>
     );

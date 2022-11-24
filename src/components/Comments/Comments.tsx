@@ -8,15 +8,25 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import {loadComments} from "../../store/actionCreators/comments";
 import {useParams} from "react-router-dom";
+import {loadPosts} from "../../store/actionCreators/posts";
+import {Post} from "../Post/Post";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 
 export const Comments: FC = () => {
     const {comments,loading,error} = useAppSelector(state => state.comments);
+    const {posts} = useAppSelector(state => state.posts)
     const dispatch = useAppDispatch();
     const {postId} = useParams();
+    const currentPost = posts.find(post => post.id.toString() === postId);
 
-    console.log(comments)
 
     useEffect(() => {
+        dispatch(loadPosts());
+
         dispatch(loadComments(postId));
     },[postId])
 
@@ -37,6 +47,18 @@ export const Comments: FC = () => {
 
     return (
         <div>
+            {currentPost? <Post post={currentPost} postId={postId} isOpen={true} /> : null}
+            {comments.length
+            ? null
+            : <Card className="comment" sx={{ maxWidth: 345 }}>
+                    <CardContent>
+                        <Typography variant="body2" color="text.secondary">
+                            No comments!
+                        </Typography>
+                    </CardContent>
+
+                </Card>}
+
             {comments.map(comment => {
                 return <Comment key={comment.id} comment={comment}/>
             })}
