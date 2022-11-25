@@ -16,7 +16,7 @@ const navItems = [{
     link: "albums"
 }, {
     name: "Todo",
-    link: "todo"
+    link: "todos"
 }];
 
 export const Header: FC = () => {

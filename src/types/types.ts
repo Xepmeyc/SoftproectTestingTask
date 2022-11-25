@@ -32,3 +32,15 @@ export interface IAlbum {
     id: number
     title: string
 }
+
+export interface ITodo{
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
+export interface INormalTodo{
+    completed: Array<ITodo>
+    noCompleted: Array<ITodo>
+}

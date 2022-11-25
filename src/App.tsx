@@ -10,6 +10,7 @@ import {Comments} from "./components/Comments/Comments";
 import {NewOrEditPost} from "./components/NewOrEditPost/NewOrEditPost";
 import {AlbumsPage} from "./pages/AlbumsPage";
 import {Slider} from "./components/Slider/Slider";
+import {TodoPage} from "./pages/TodoPage";
 
 
 export const App = () => {
@@ -21,11 +22,13 @@ export const App = () => {
                     <Routes>
                         <Route index element={<HomePage/>}/>
                         <Route path="/posts" element={<Posts/>}/>
-                        <Route path = "posts/:postId" element={<Comments/>}/>
+                        <Route path ="/posts/:postId" element={<Comments/>}/>
+                        <Route path="posts/edit/:id" element={<NewOrEditPost/>}/>
                         <Route path="/create" element={<NewOrEditPost/>}/>
-                        <Route path="/edit/:id" element={<NewOrEditPost/>}/>
                         <Route path="/albums" element={<AlbumsPage />}/>
                         <Route path="/albums/:albumId" element={<Slider/>}/>
+                        <Route path="/todos" element={<TodoPage/>}/>
+
                     </Routes>
                 </Layout>
             </Provider>

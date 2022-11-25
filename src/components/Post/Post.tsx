@@ -42,7 +42,7 @@ export const Post: FC<IProps> = ({post, postId,isOpen= false}) => {
                         <Button size="small">Learn More</Button>
                     </NavLink>}
 
-                <NavLink to ={`/edit/${post.id}`}>
+                <NavLink to ={`edit/${post.id}`}>
                     <Button size="small">Edit</Button>
                 </NavLink>
                 <Button onClick={deletePost} size="small">Delete</Button>
