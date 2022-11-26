@@ -3,12 +3,14 @@ import {IAlbum} from "../../types/types";
 
 interface AlbumState {
     albums: Array<IAlbum>
+    currentAlbum: IAlbum | null
     loading: boolean
     error: null | string
 }
 
 const initialState: AlbumState = {
     albums: [],
+    currentAlbum: null,
     loading: true,
     error: null
 }
@@ -46,6 +48,11 @@ export const albumsSlice = createSlice({
                 return post;
             });
             state.loading = false;
-        }
+        },
+        setCurrentAlbum: (state, action) => ({
+            ...state,
+            currentAlbum: action.payload,
+            loading: false
+        }),
     },
 })

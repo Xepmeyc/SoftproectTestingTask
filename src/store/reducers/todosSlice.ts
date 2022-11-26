@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {INormalTodo, ITodo} from "../../types/types";
+import {INormalTodo} from "../../types/types";
 
 interface TodoState {
     todos: INormalTodo

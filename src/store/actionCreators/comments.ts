@@ -1,7 +1,6 @@
 import {commentsSlice} from "../reducers/commentsSlice";
 import {instance} from "../../api";
 import {store} from "../index";
-import {postSlice} from "../reducers/postSlice";
 
 export const loadComments = (postId) => {
     const {startLoading, successLoading, failLoading} = commentsSlice.actions;

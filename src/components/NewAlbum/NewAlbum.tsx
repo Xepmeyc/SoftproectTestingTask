@@ -2,7 +2,6 @@ import React, {FC, useState} from 'react';
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
-import {deletePosts} from "../../store/actionCreators/posts";
 import {INewAlbum} from "../../types/types";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {addEmptyAlbum} from "../../store/actionCreators/albums";

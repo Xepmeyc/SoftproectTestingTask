@@ -7,12 +7,10 @@ import {IPhoto} from "../../types/types";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {loadPhotosInAlbum} from "../../store/actionCreators/photos";
 import {useParams} from "react-router-dom";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import {loadAlbums} from "../../store/actionCreators/albums";
+import {getCurrentAlbum} from "../../store/actionCreators/albums";
 import Button from "@mui/material/Button";
+import {LoadingBar} from "../LoadingBar/LoadingBar";
+import {ShowError} from "../ShowError/ShowError";
 
 interface ISliderContext{
     goToSlide: (number: number) => void
@@ -36,32 +34,20 @@ export const Slider:FC = () => {
     const dispatch = useAppDispatch();
     const {photos,loading,error} = useAppSelector(state => state.photos);
     const {albumId} = useParams();
-    const {albums} = useAppSelector(state => state.albums)
-    const album = albums.find(album => album.id.toString() === albumId);
+    const {currentAlbum} = useAppSelector(state => state.albums);
 
     const [slide, setSlide] = useState(0);
 
     useEffect(() => {
         if (albumId){
-            dispatch(loadAlbums());
+            dispatch(getCurrentAlbum(albumId));
             dispatch(loadPhotosInAlbum(albumId));
         }
     }, []);
 
-    if (loading){
-        return (
-            <Box sx={{ width: '100%' }}>
-                <LinearProgress />
-            </Box>
-        );
-    }
+    if (loading) return <LoadingBar/>
 
-    if (error){
-        return (<Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {error}
-        </Alert>)
-    }
+    if (error) return <ShowError error={error}/>
 
     if (!photos.length){
         return <div>No photos</div>
@@ -86,13 +72,9 @@ export const Slider:FC = () => {
 
 
     return (
-        <div
-            className="slider"
-        >
-            <Button
-                id="basic-button"
-            >
-                {album?.title}
+        <div className="slider">
+            <Button id="basic-button">
+                {currentAlbum?.title}
             </Button>
             <SliderContext.Provider
                 value={{

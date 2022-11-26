@@ -1,37 +1,36 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
-import {INewPost, IPost} from "../../types/types";
-import LinearProgress from "@mui/material/LinearProgress";
-import Box from "@mui/material/Box";
+import {INewPost} from "../../types/types";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {addPost, changePost, loadPosts} from "../../store/actionCreators/posts";
+import {addPost, changePost, getCurrentPost, loadPosts} from "../../store/actionCreators/posts";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import AlertTitle from "@mui/material/AlertTitle";
-import Alert from "@mui/material/Alert";
 import {useParams} from "react-router-dom";
+import {LoadingBar} from "../LoadingBar/LoadingBar";
+import {ShowError} from "../ShowError/ShowError";
 
 export const NewOrEditPost: FC = () => {
-    const newPost:INewPost = {
-        userId: Date.now(),
-        title: "",
-        body: ""
-    }
 
-    const [title, setTitle] = React.useState('');
-    const [body, setBody] = React.useState('');
+    const initialState = {
+        body: "",
+        title: "",
+        userId: Date.now(),
+    };
+
+    const [newPost, setNewPost] = useState<INewPost>(initialState)
 
     const {id} = useParams();
 
     const dispatch = useAppDispatch();
-    const {loading, error, posts} = useAppSelector(state => state.posts);
-
-    const currentPost = posts.find(post => post.id.toString() === id);
-
+    const {loading, error, currentPost} = useAppSelector(state => state.posts);
 
     useEffect(() => {
-        dispatch(loadPosts());
+        if (id) {
+            dispatch(getCurrentPost(id));
+        } else {
+            dispatch(loadPosts());
+        }
 
         setInitialState();
 
@@ -40,26 +39,23 @@ export const NewOrEditPost: FC = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "title") {
-            setTitle(event.target.value);
+            setNewPost({...newPost, title: event.target.value});
             return;
         }
 
-        setBody(event.target.value);
+        setNewPost({...newPost, body: event.target.value});
     };
 
     const createNewPost = () => {
-        newPost.body = body;
-        newPost.title = title;
-
         dispatch(addPost(newPost));
     }
 
     const saveEdit = () => {
         if (currentPost){
             dispatch(changePost({
-                body,
+                body: newPost.body,
                 userId: currentPost.userId,
-                title,
+                title: newPost.title,
                 id: currentPost.id})
             )
         }
@@ -67,14 +63,12 @@ export const NewOrEditPost: FC = () => {
     }
 
     const clearPost = () => {
-        setBody("");
-        setTitle("");
+        setNewPost(initialState);
     }
 
     const setInitialState = () => {
         if (currentPost){
-            setBody(currentPost.body);
-            setTitle(currentPost.title);
+            setNewPost({...newPost, body: currentPost.body, title: currentPost.title})
         }
     }
 
@@ -89,7 +83,7 @@ export const NewOrEditPost: FC = () => {
                     placeholder="Placeholder"
                     multiline
                     variant="standard"
-                    value={title}
+                    value={newPost.title}
                     onChange={handleChange}
                 />
             </div>
@@ -101,7 +95,7 @@ export const NewOrEditPost: FC = () => {
                     label="Post body"
                     multiline
                     rows={4}
-                    value={body}
+                    value={newPost.body}
                     onChange={handleChange}
                 />
             </div>
@@ -121,18 +115,12 @@ export const NewOrEditPost: FC = () => {
             </Button>
 
             {loading
-                ? <Box sx={{ width: '100%' }}>
-                        <LinearProgress />
-                      </Box>
+                ? <LoadingBar/>
                 : null
             }
-            {
-                error
-                    ? <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        {error}
-                      </Alert>
-                    : null
+            {error
+                ? <ShowError error={error}/>
+                : null
             }
         </div>
     );

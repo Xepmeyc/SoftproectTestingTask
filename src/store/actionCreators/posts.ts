@@ -31,7 +31,6 @@ export const deletePosts = (postId: number) => {
             dispatch(postDeleting(postId))
         }catch (error){
             dispatch(failLoading(error.message));
-
         }
     }
 }
@@ -58,6 +57,25 @@ export const changePost = (changedPost:IPost) => {
             dispatch(postLoading());
             const response = await instance.put(`/posts/${changedPost.id}`,JSON.stringify(changedPost));
             dispatch(postChanging(response.data));
+        }catch (error){
+            dispatch(failLoading(error.message));
+        }
+    }
+}
+
+export const getCurrentPost = (postId: string) => {
+    const {failLoading, setCurrentPost} = postSlice.actions;
+
+    return async (dispatch) => {
+        try {
+            const {currentPost} = store.getState().posts;
+
+            if (currentPost && currentPost.id.toString() === postId){
+                return
+            }
+
+            const response = await instance.get(`/posts/${postId}`);
+            dispatch(setCurrentPost(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
         }

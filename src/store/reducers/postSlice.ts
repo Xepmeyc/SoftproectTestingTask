@@ -3,12 +3,14 @@ import {IPost} from "../../types/types";
 
 interface PostState {
     posts: Array<IPost>
+    currentPost: IPost | null
     loading: boolean
     error: null | string
 }
 
 const initialState: PostState = {
     posts: [],
+    currentPost: null,
     loading: true,
     error: null
 }
@@ -49,6 +51,11 @@ export const postSlice = createSlice({
                 return post;
             });
             state.loading = false;
-        }
+        },
+        setCurrentPost: (state, action) => ({
+            ...state,
+            currentPost: action.payload,
+            loading: false
+        }),
     },
 })

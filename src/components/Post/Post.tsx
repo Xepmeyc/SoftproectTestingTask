@@ -6,17 +6,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import {IPost} from "../../types/types";
-import {NavLink, useNavigate, useNavigation} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deletePosts} from "../../store/actionCreators/posts";
 
 interface IProps {
     post: IPost
-    postId: string | undefined
     isOpen: boolean
 }
 
-export const Post: FC<IProps> = ({post, postId,isOpen= false}) => {
+export const Post: FC<IProps> = ({post,isOpen= false}) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -38,7 +37,7 @@ export const Post: FC<IProps> = ({post, postId,isOpen= false}) => {
             <CardActions>
                 {isOpen
                     ? null
-                    : <NavLink to = {postId? "/posts" : post.id.toString()}>
+                    : <NavLink to = {post.id.toString()}>
                         <Button size="small">Learn More</Button>
                     </NavLink>}
 

@@ -3,35 +3,22 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {FC, useState} from "react";
+import {FC} from "react";
 import {IComment} from "../../types/types";
 import Button from "@mui/material/Button";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deleteComment} from "../../store/actionCreators/comments";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
+import {LoadingBar} from "../LoadingBar/LoadingBar";
+import {ShowError} from "../ShowError/ShowError";
 
 export const Comment: FC<{comment: IComment}> = ({comment}) => {
     const dispatch = useAppDispatch();
     const {loading,error} = useAppSelector(state => state.comments);
 
-    if (loading){
-        return (
-            <Box sx={{ width: '100%' }}>
-                <LinearProgress />
-            </Box>
-        );
-    }
+    if (loading) return <LoadingBar/>
 
-    if (error){
-        return (<Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {error}
-        </Alert>)
-    }
+    if (error) return <ShowError error={error}/>
 
     const commentDelete = () => {
         dispatch(deleteComment(comment.id));

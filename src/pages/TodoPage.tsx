@@ -1,14 +1,10 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch";
-import {loadTodos, todoUpdate} from "../store/actionCreators/todos";
+import {loadTodos} from "../store/actionCreators/todos";
 import Todos from "../components/Todo/Todos";
 import {useAppSelector} from "../hooks/useAppSelector";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import SendIcon from "@mui/icons-material/Send";
-import Button from "@mui/material/Button";
+import {LoadingBar} from "../components/LoadingBar/LoadingBar";
+import {ShowError} from "../components/ShowError/ShowError";
 
 export const TodoPage = () => {
     const dispatch = useAppDispatch();
@@ -19,21 +15,9 @@ export const TodoPage = () => {
         dispatch(loadTodos());
     }, []);
 
+    if (loading) return <LoadingBar/>
 
-    if (loading){
-        return (
-            <Box sx={{ width: '100%' }}>
-                <LinearProgress />
-            </Box>
-        );
-    }
-
-    if (error){
-        return (<Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {error}
-        </Alert>)
-    }
+    if (error) return <ShowError error={error}/>
 
     return (
         <div className="flex flex-col items-center bg-gray-100 min-h-screen">

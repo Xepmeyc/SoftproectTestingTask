@@ -1,8 +1,7 @@
 import {store} from "../index";
 import {instance} from "../../api";
 import {albumsSlice} from "../reducers/albumsSlice";
-import {postSlice} from "../reducers/postSlice";
-import {IAlbum, INewAlbum, INewPost, IPost} from "../../types/types";
+import {IAlbum, INewAlbum} from "../../types/types";
 
 export const loadAlbums = () => {
     const {startLoading, successLoading, failLoading} = albumsSlice.actions;
@@ -57,6 +56,26 @@ export const changeAlbum = (changingAlbum:IAlbum) => {
         try {
             const response = await instance.put(`/albums/${changingAlbum.id}`,JSON.stringify(changingAlbum));
             dispatch(albumChanging(response.data));
+        }catch (error){
+            dispatch(failLoading(error.message));
+        }
+    }
+}
+
+export const getCurrentAlbum = (albumId: string) => {
+    const {failLoading, setCurrentAlbum} = albumsSlice.actions;
+
+    return async (dispatch) => {
+        try {
+            const {currentAlbum} = store.getState().albums;
+
+            if (currentAlbum && currentAlbum.id.toString() === albumId){
+                return
+            }
+
+            const response = await instance.get(`/albums/${albumId}`);
+            console.log("Getting album", albumId)
+            dispatch(setCurrentAlbum(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
         }
