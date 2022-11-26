@@ -2,13 +2,13 @@ import {createSlice} from "@reduxjs/toolkit";
 import {INormalTodo, ITodo} from "../../types/types";
 
 interface TodoState {
-    todos: Array<ITodo>
+    todos: INormalTodo
     loading: boolean
     error: null | string
 }
 
 const initialState: TodoState = {
-    todos: [],
+    todos: {completed: [], noCompleted: []},
     loading: true,
     error: null
 }
@@ -35,9 +35,8 @@ export const todosSlice = createSlice({
             ...action.payload,
             loading: false
         }),
-        updateTodos: (state, action) => {
-            state.todos = action.payload;
-            console.log(action.payload)
+        updateTodos: (state, {payload}) => {
+            state.todos = payload;
         }
     },
 })

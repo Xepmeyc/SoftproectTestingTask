@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import {IPost} from "../../types/types";
-import {NavLink, Outlet, useNavigate, useNavigation} from "react-router-dom";
+import {NavLink, useNavigate, useNavigation} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deletePosts} from "../../store/actionCreators/posts";
 
@@ -42,12 +42,11 @@ export const Post: FC<IProps> = ({post, postId,isOpen= false}) => {
                         <Button size="small">Learn More</Button>
                     </NavLink>}
 
-                <NavLink to ={`edit/${post.id}`}>
+                <NavLink to ={isOpen? `/posts/edit/${post.id}`: `edit/${post.id}`}>
                     <Button size="small">Edit</Button>
                 </NavLink>
                 <Button onClick={deletePost} size="small">Delete</Button>
             </CardActions>
-            {/*{post.id.toString() === postId? <Outlet />: ""}*/}
         </Card>
     );
 };

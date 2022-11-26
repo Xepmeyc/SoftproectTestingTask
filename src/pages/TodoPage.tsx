@@ -7,9 +7,13 @@ import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
+
 export const TodoPage = () => {
     const dispatch = useAppDispatch();
     const {todos,loading,error} = useAppSelector(state => state.todos);
+    console.log("TodoPage", todos)
 
     useEffect(() => {
         dispatch(loadTodos());

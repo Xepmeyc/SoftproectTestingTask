@@ -7,12 +7,15 @@ import AlertTitle from "@mui/material/AlertTitle";
 import {Grid} from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import {NavLink} from "react-router-dom";
+import {NavLink, Outlet, useParams} from "react-router-dom";
+import {Album} from "../components/Album/Album";
+import Button from "@mui/material/Button";
 
 
 export const AlbumsPage = () => {
     const dispatch = useAppDispatch();
-    const {albums,loading,error} = useAppSelector(state => state.albums)
+    const {albums,loading,error} = useAppSelector(state => state.albums);
+    const {albumId} = useParams();
 
     useEffect(() => {
         dispatch(loadAlbums());
@@ -33,27 +36,22 @@ export const AlbumsPage = () => {
                 </Alert>)
     }
 
+
      return (
         <Box sx={{ flexGrow: 1, p: 2 }}>
+            <NavLink to="create">
+                <Button>Add new empty album</Button>
+            </NavLink>
+            {
+                albumId? null : <Outlet/>
+            }
+
             <Grid
                 container
                 spacing={2}
             >
                 {albums.map((album) => (
-                        <Grid key={album.id} item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} minHeight={160}>
-                            <NavLink className="navLink" to={`/albums/${album.id.toString()}`}>
-                                <div
-                                    /*style={
-                                        {
-                                            backgroundColor: '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase()
-                                        }
-                                    }*/
-                                     className="album"
-                                >
-                                    {album.title}
-                                </div>
-                            </NavLink>
-                        </Grid>
+                        <Album album={album} key={album.id}/>
                 ))}
             </Grid>
         </Box>

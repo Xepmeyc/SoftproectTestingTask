@@ -11,6 +11,8 @@ import {NewOrEditPost} from "./components/NewOrEditPost/NewOrEditPost";
 import {AlbumsPage} from "./pages/AlbumsPage";
 import {Slider} from "./components/Slider/Slider";
 import {TodoPage} from "./pages/TodoPage";
+import {NewAlbum} from "./components/NewAlbum/NewAlbum";
+import {EditAlbum} from "./components/EditAlbum/EditAlbum";
 
 
 export const App = () => {
@@ -25,7 +27,10 @@ export const App = () => {
                         <Route path ="/posts/:postId" element={<Comments/>}/>
                         <Route path="posts/edit/:id" element={<NewOrEditPost/>}/>
                         <Route path="/create" element={<NewOrEditPost/>}/>
-                        <Route path="/albums" element={<AlbumsPage />}/>
+                        <Route path="/albums" element={<AlbumsPage />}>
+                            <Route path="create" element={<NewAlbum/>}/>
+                            <Route path="edit/:albumId" element={<EditAlbum/>}/>
+                        </Route>
                         <Route path="/albums/:albumId" element={<Slider/>}/>
                         <Route path="/todos" element={<TodoPage/>}/>
 

@@ -50,7 +50,7 @@ export const Comments: FC = () => {
             {currentPost? <Post post={currentPost} postId={postId} isOpen={true} /> : null}
             {comments.length
             ? null
-            : <Card className="comment" sx={{ maxWidth: 345 }}>
+            : <Card className="comment">
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
                             No comments!

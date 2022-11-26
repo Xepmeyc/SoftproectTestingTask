@@ -9,17 +9,17 @@ export const loadTodos = () => {
         try {
             const {todos} = store.getState().todos;
 
-            if (todos.length){
+            if (todos.noCompleted.length && todos.completed.length){
                 return
             }
 
             dispatch(startLoading());
             const {data} = await instance.get("/todos");
-            /*const itemsNormal:INormalTodo = {
+            const itemsNormal:INormalTodo = {
                 noCompleted: data.filter(todo => !todo.completed),
                 completed: data.filter(todo => todo.completed),
-            };*/
-            dispatch(successLoading(data));
+            };
+            dispatch(successLoading(itemsNormal));
         }catch (error){
             dispatch(failLoading(error.message));
         }

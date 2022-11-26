@@ -4,20 +4,16 @@ import {
     DragDropContext,
     Draggable,
     DraggableProvided,} from "react-beautiful-dnd";
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {INormalTodo, ITodo} from "../../types/types";
-import {changeComplete, todoUpdate} from "../../store/actionCreators/todos";
+import {todoUpdate} from "../../store/actionCreators/todos";
 import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 
 
-const Todos:FC<{todos: Array<ITodo> }> = ({todos}) => {
+const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
     const dispatch = useAppDispatch();
-    const itemsNormal:INormalTodo = {
-        noCompleted: todos.filter(todo => !todo.completed),
-        completed: todos.filter(todo => todo.completed),
-    };
 
     const initialTodo:ITodo = {
         id: 0,
@@ -25,16 +21,19 @@ const Todos:FC<{todos: Array<ITodo> }> = ({todos}) => {
         completed: false,
         userId: 0
     }
-    const [items, setItems] = useState(itemsNormal);
+    const [items, setItems] = useState(todos);
     const [currentTodo, setCurrentTodo] = useState(initialTodo);
 
-    useEffect(() => {
-        setItems(itemsNormal);
-    }, []);
-
-
-    const removeFromList = (list: Array<ITodo>, index: number) => {
-        const result = Array.from(list);
+    const removeFromList = (list: Array<ITodo>, index: number, completedStatus: string) => {
+        const status = {completed: true, noCompleted: false}
+        const changedItems = list.map(item => {
+            if (item.id === currentTodo.id){
+                console.log("Completed",item)
+                return {...item, completed: status[completedStatus]}
+            }
+            return  item;
+        })
+        const result = Array.from(changedItems);
         const [removed] = result.splice(index, 1);
         return [removed, result];
     };
@@ -47,19 +46,17 @@ const Todos:FC<{todos: Array<ITodo> }> = ({todos}) => {
 
     const onDragEnd = (result) => {
         const {destination, source} = result;
+        console.log(destination)
         if (!destination) {
             return;
         }
         const listCopy:INormalTodo = { ...items };
         const sourceList:Array<ITodo>= listCopy[source.droppableId];
 
-       /* if (destination.droppableId !== source.droppableId){
-            dispatch(changeComplete(currentTodo));
-        }*/
-
         const [removedElement, newSourceList] = removeFromList(
             sourceList,
-            source.index
+            source.index,
+            destination.droppableId
         );
         listCopy[source.droppableId] = newSourceList;
 
@@ -78,6 +75,7 @@ const Todos:FC<{todos: Array<ITodo> }> = ({todos}) => {
     }
 
     const save = () => {
+
         dispatch(todoUpdate(items))
     }
 

@@ -29,5 +29,23 @@ export const albumsSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        emptyAlbumAdding: (state, action) => {
+            state.albums.unshift(action.payload);
+            state.loading = false;
+        },
+        albumDeleting: (state, action) => {
+            state.albums = state.albums.filter(post => post.id !== action.payload);
+            state.loading = false;
+        },
+        albumChanging: (state, action) => {
+            state.albums = state.albums.map(post => {
+                if (post.id === action.payload.id){
+                    return action.payload;
+                }
+
+                return post;
+            });
+            state.loading = false;
+        }
     },
 })

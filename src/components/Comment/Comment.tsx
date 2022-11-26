@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {FC} from "react";
+import {FC, useState} from "react";
 import {IComment} from "../../types/types";
 import Button from "@mui/material/Button";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -37,8 +37,8 @@ export const Comment: FC<{comment: IComment}> = ({comment}) => {
         dispatch(deleteComment(comment.id));
     }
     return (
-        <Card className="comment" sx={{ maxWidth: 345 }}>
-            <CardHeader
+        <Card className="comment">
+            <CardHeader className="comment_header"
                 title={comment.name}
                 subheader={comment.email}
             />
@@ -47,6 +47,7 @@ export const Comment: FC<{comment: IComment}> = ({comment}) => {
                 <Typography variant="body2" color="text.secondary">
                     {comment.body}
                 </Typography>
+
             </CardContent>
 
             <Button onClick={commentDelete} size="small">Delete</Button>

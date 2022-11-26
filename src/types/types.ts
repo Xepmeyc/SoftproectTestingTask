@@ -5,17 +5,17 @@ export interface IPost {
     body: string
 }
 
+export interface INewPost {
+    userId: number
+    title: string
+    body: string
+}
+
 export interface IComment {
     postId: number
     id: number
     name: string
     email: string
-    body: string
-}
-
-export interface INewPost {
-    userId: number
-    title: string
     body: string
 }
 
@@ -30,6 +30,11 @@ export interface IPhoto {
 export interface IAlbum {
     userId: number
     id: number
+    title: string
+}
+
+export interface INewAlbum {
+    userId: number
     title: string
 }
 

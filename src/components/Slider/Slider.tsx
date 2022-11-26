@@ -63,6 +63,10 @@ export const Slider:FC = () => {
         </Alert>)
     }
 
+    if (!photos.length){
+        return <div>No photos</div>
+    }
+
 
     const changeSlide = (direction = 1) => {
         let slideNumber = 0;
