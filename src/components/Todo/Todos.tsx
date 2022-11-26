@@ -7,9 +7,10 @@ import {
 import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {INormalTodo, ITodo} from "../../types/types";
-import {todoUpdate} from "../../store/actionCreators/todos";
+import {todoDelete, todoUpdate} from "../../store/actionCreators/todos";
 import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
+import {TextField} from "@mui/material";
 
 
 const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
@@ -21,14 +22,15 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
         completed: false,
         userId: 0
     }
+
     const [items, setItems] = useState(todos);
     const [currentTodo, setCurrentTodo] = useState(initialTodo);
+    const [todoTitle, setTodoTitle] = useState("");
 
     const removeFromList = (list: Array<ITodo>, index: number, completedStatus: string) => {
         const status = {completed: true, noCompleted: false}
         const changedItems = list.map(item => {
             if (item.id === currentTodo.id){
-                console.log("Completed",item)
                 return {...item, completed: status[completedStatus]}
             }
             return  item;
@@ -46,7 +48,6 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
 
     const onDragEnd = (result) => {
         const {destination, source} = result;
-        console.log(destination)
         if (!destination) {
             return;
         }
@@ -75,9 +76,31 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
     }
 
     const save = () => {
-
         dispatch(todoUpdate(items))
     }
+
+    const deleteHandle = (todo: ITodo) => {
+        const copyTodoList: INormalTodo = {
+            ...items
+        }
+
+        copyTodoList[getStatus(todo.completed)] = todos[getStatus(todo.completed)].filter(item => item.id !== todo.id);
+        dispatch(todoDelete(copyTodoList, todo.id));
+        setItems(copyTodoList);
+    }
+
+    const getStatus = (completed: boolean) => {
+        if (completed){
+            return "completed";
+        }
+
+        return "noCompleted";
+    }
+
+    const changeHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTodoTitle(event.target.value);
+    }
+
 
     return (
             <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
@@ -85,8 +108,8 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
                     Save
                 </Button>
                 <div className="flex">
-                    <List title="Completed" onDragEnd={onDragEnd} name="completed">
-                        {items.completed.map((item, index) => (
+                    <List title="No completed" onDragEnd={onDragEnd} name="noCompleted">
+                        {items.noCompleted.map((item, index) => (
                             <Draggable onDragStart={onDragStart} key={item.id} draggableId={item.id.toString()} index={index}>
                                 {(
                                     provided: DraggableProvided,
@@ -98,15 +121,17 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
                                         >
-                                            <Card data={item}/>
+                                            <Card data={item}>
+                                                <Button onClick={() => deleteHandle(item)}>Delete</Button>
+                                            </Card>
                                         </div>
                                     </div>
                                 )}
                             </Draggable>
                         ))}
                     </List>
-                    <List title="No completed" onDragEnd={onDragEnd} name="noCompleted">
-                        {items.noCompleted.map((item, index) => (
+                    <List title="Completed" onDragEnd={onDragEnd} name="completed">
+                        {items.completed.map((item, index) => (
                             <Draggable draggableId={item.id.toString()} index={index} key={item.id}>
                                 {(provided: DraggableProvided,) => (
                                     <div
@@ -114,7 +139,9 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                     >
-                                        <Card data={item}/>
+                                        <Card data={item}>
+                                            <Button onClick={() => deleteHandle(item)}>Delete</Button>
+                                        </Card>
                                     </div>
                                 )}
                             </Draggable>

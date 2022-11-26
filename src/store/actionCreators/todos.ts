@@ -26,21 +26,22 @@ export const loadTodos = () => {
     }
 }
 
-export const changeComplete = (todo: ITodo) => {
-    const {changeCompleteStatus} = todosSlice.actions;
-    const changingTodo:ITodo = {
-        ...todo,
-        completed:!todo.completed
-    }
-
-    return (dispatch) => {
-        dispatch(changeCompleteStatus(changingTodo))
-    }
-}
-
 export const todoUpdate = (updatedTodos:INormalTodo) => {
     const {updateTodos} = todosSlice.actions;
     return (dispatch) => {
         dispatch(updateTodos(updatedTodos))
+    }
+}
+
+export const todoDelete = (todo:INormalTodo, todoId: number) => {
+    const {todoDeleting, failLoading} = todosSlice.actions;
+    return async (dispatch) => {
+        try {
+            dispatch(todoDeleting(todo));
+            await instance.delete(`/todos/${todoId.toString()}`);
+
+        }catch (error) {
+            dispatch(failLoading(error.message));
+        }
     }
 }

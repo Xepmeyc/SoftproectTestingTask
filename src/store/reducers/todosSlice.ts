@@ -30,13 +30,14 @@ export const todosSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-        changeCompleteStatus: (state, action) => ({
-            ...state,
-            ...action.payload,
-            loading: false
-        }),
         updateTodos: (state, {payload}) => {
+            console.log(state.todos)
             state.todos = payload;
-        }
+        },
+        todoDeleting: (state, {payload}) => {
+            state.todos = payload;
+            state.loading = false;
+            console.log(state.todos)
+        },
     },
 })

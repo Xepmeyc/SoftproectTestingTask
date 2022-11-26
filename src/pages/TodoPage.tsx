@@ -9,7 +9,6 @@ import {ShowError} from "../components/ShowError/ShowError";
 export const TodoPage = () => {
     const dispatch = useAppDispatch();
     const {todos,loading,error} = useAppSelector(state => state.todos);
-    console.log("TodoPage", todos)
 
     useEffect(() => {
         dispatch(loadTodos());
