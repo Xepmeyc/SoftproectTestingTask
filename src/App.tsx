@@ -1,6 +1,6 @@
 import React from 'react';
 import "./style.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
 import {HomePage} from "./pages/HomePage";
 import {Layout} from "./components/Layout/Layout";
 import {Posts} from "./components/Posts/Posts";
@@ -17,7 +17,7 @@ import {NewAlbum} from "./components/NewAlbum/NewAlbum";
 export const App = () => {
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <Layout>
                     <Routes>
@@ -34,6 +34,6 @@ export const App = () => {
                     </Routes>
                 </Layout>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     );
 };
