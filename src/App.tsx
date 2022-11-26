@@ -17,7 +17,7 @@ import {NewAlbum} from "./components/NewAlbum/NewAlbum";
 export const App = () => {
 
     return (
-        <HashRouter>
+        <HashRouter basename={"/SoftproectTestingTask"}>
             <Provider store={store}>
                 <Layout>
                     <Routes>
