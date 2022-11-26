@@ -6,7 +6,7 @@ import {INewPost} from "../../types/types";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {addPost, changePost, getCurrentPost, loadPosts} from "../../store/actionCreators/posts";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
 
@@ -21,6 +21,7 @@ export const NewOrEditPost: FC = () => {
     const [newPost, setNewPost] = useState<INewPost>(initialState)
 
     const {id} = useParams();
+    const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
     const {loading, error, currentPost} = useAppSelector(state => state.posts);
@@ -48,6 +49,7 @@ export const NewOrEditPost: FC = () => {
 
     const createNewPost = () => {
         dispatch(addPost(newPost));
+        navigate("/posts");
     }
 
     const saveEdit = () => {
@@ -58,6 +60,8 @@ export const NewOrEditPost: FC = () => {
                 title: newPost.title,
                 id: currentPost.id})
             )
+            navigate("/posts");
+
         }
 
     }
