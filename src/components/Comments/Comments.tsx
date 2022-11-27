@@ -1,14 +1,14 @@
 import React, {FC, useEffect} from 'react';
-import {Comment} from "../Comment/Comment";
 import {useAppSelector} from "../../hooks/useAppSelector";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import {Comment} from "../Comment/Comment";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {loadComments} from "../../store/actionCreators/comments";
 import {useParams} from "react-router-dom";
 import {getCurrentPost} from "../../store/actionCreators/posts";
 import {Post} from "../Post/Post";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
 

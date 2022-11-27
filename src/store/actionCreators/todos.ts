@@ -1,7 +1,7 @@
 import {store} from "../index";
 import {instance} from "../../api";
 import {todosSlice} from "../reducers/todosSlice";
-import {INormalTodo, ITodo} from "../../types/types";
+import {INormalTodo} from "../../types/types";
 
 export const loadTodos = () => {
     const {startLoading, successLoading, failLoading} = todosSlice.actions;

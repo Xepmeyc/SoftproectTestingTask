@@ -16,7 +16,6 @@ export const loadPosts = (isNoReloading = true) => {
 
             dispatch(startLoading());
             const response = await instance.get("/posts");
-            console.log("Loading posts");
             dispatch(successLoading(response.data));
         }catch (error){
             dispatch(failLoading(error.message));

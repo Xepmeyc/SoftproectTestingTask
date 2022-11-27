@@ -15,7 +15,6 @@ export const loadAlbums = () => {
 
             dispatch(startLoading());
             const response = await instance.get("/albums");
-            console.log("Loading albums");
             dispatch(successLoading(response.data));
         }catch (error){
             dispatch(failLoading(error.message));
@@ -74,7 +73,6 @@ export const getCurrentAlbum = (albumId: string) => {
             }
 
             const response = await instance.get(`/albums/${albumId}`);
-            console.log("Getting album", albumId)
             dispatch(setCurrentAlbum(response.data));
         }catch (error){
             dispatch(failLoading(error.message));

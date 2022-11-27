@@ -14,7 +14,6 @@ export const loadComments = (postId) => {
             }
             dispatch(startLoading());
             const response = await instance.get(`/posts/${postId}/comments`);
-            console.log("Loading comments");
             dispatch(successLoading(response.data));
         }catch (error){
             dispatch(failLoading(error.message));

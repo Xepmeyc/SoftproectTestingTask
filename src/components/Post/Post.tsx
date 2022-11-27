@@ -1,16 +1,16 @@
 import * as React from 'react';
+import {FC} from "react";
+import {NavLink, useNavigate} from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import {FC} from "react";
-import {IPost} from "../../types/types";
-import {NavLink, useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {deletePosts} from "../../store/actionCreators/posts";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {deletePosts} from "../../store/actionCreators/posts";
+import {IPost} from "../../types/types";
 
 interface IProps {
     post: IPost

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {FC} from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {NavLink} from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
-import {FC} from "react";
 
 const navItems = [{
     name: "Posts",

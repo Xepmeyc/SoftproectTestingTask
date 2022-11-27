@@ -1,16 +1,15 @@
 import React, {createContext, FC, useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {loadPhotosInAlbum} from "../../store/actionCreators/photos";
+import {getCurrentAlbum} from "../../store/actionCreators/albums";
 import {Arrows} from "./Arrows";
 import {SlidesList} from "./SlidesList";
 import {Dots} from "./Dots";
-import {IPhoto} from "../../types/types";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {loadPhotosInAlbum} from "../../store/actionCreators/photos";
-import {useParams} from "react-router-dom";
-import {getCurrentAlbum} from "../../store/actionCreators/albums";
-import Button from "@mui/material/Button";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
+import {IPhoto} from "../../types/types";
 
 interface ISliderContext{
     goToSlide: (number: number) => void
@@ -45,14 +44,6 @@ export const Slider:FC = () => {
         }
     }, []);
 
-    if (loading) return <LoadingBar/>
-
-    if (error) return <ShowError error={error}/>
-
-    if (!photos.length){
-        return <div>No photos</div>
-    }
-
 
     const changeSlide = (direction = 1) => {
         let slideNumber = 0;
@@ -69,6 +60,15 @@ export const Slider:FC = () => {
     const goToSlide = (number:number) => {
         setSlide(number % photos.length);
     };
+
+    if (loading) return <LoadingBar/>
+
+    if (error) return <ShowError error={error}/>
+
+    if (!photos.length){
+        return <div>No photos</div>
+    }
+
 
 
     return (

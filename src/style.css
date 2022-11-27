@@ -11,6 +11,9 @@ h2{
     display: flex;
     justify-content: center;
 }
+.home{
+    justify-content: center;
+}
 .navigationLinks button:hover{
     cursor: pointer;
     color: #acbdd3;
@@ -208,18 +211,8 @@ a:hover{
 }
 .flex {
     display: flex;
-
+    justify-content: center;
 }
-/*.noCompletedList {
-    background-color: #1976d2;
-    border: 2px solid white;
-    border-radius: 30px;
-}
-.completedList{
-    background-color: whitesmoke;
-    border: 5px solid #1976d2;
-    border-radius: 30px;
-}*/
 .todo .draggableItem{
     display: flex;
     justify-content: right;

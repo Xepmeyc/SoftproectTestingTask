@@ -1,10 +1,10 @@
 import React, {FC, useEffect} from 'react';
-import {Post} from  "../Post/Post"
+import {NavLink} from "react-router-dom";
+import Button from "@mui/material/Button";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {loadPosts} from "../../store/actionCreators/posts";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {NavLink} from "react-router-dom";
-import Button from "@mui/material/Button";
+import {Post} from  "../Post/Post"
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
 

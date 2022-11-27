@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch} from "../hooks/useAppDispatch";
-import {loadAlbums} from "../store/actionCreators/albums";
-import {useAppSelector} from "../hooks/useAppSelector";
+import {NavLink} from "react-router-dom";
 import {Grid} from "@mui/material";
 import Box from "@mui/material/Box";
-import {NavLink} from "react-router-dom";
-import {Album} from "../components/Album/Album";
 import Button from "@mui/material/Button";
+import {useAppDispatch} from "../hooks/useAppDispatch";
+import {useAppSelector} from "../hooks/useAppSelector";
+import {loadAlbums} from "../store/actionCreators/albums";
+import {Album} from "../components/Album/Album";
 import {LoadingBar} from "../components/LoadingBar/LoadingBar";
 import {ShowError} from "../components/ShowError/ShowError";
 

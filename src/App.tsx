@@ -1,23 +1,22 @@
 import React from 'react';
+import {Provider} from "react-redux";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import "./style.css";
-import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
+import {store} from "./store";
 import {HomePage} from "./pages/HomePage";
+import {TodoPage} from "./pages/TodoPage";
+import {AlbumsPage} from "./pages/AlbumsPage";
 import {Layout} from "./components/Layout/Layout";
 import {Posts} from "./components/Posts/Posts";
-import {store} from "./store";
-import {Provider} from "react-redux";
 import {Comments} from "./components/Comments/Comments";
 import {NewOrEditPost} from "./components/NewOrEditPost/NewOrEditPost";
-import {AlbumsPage} from "./pages/AlbumsPage";
 import {Slider} from "./components/Slider/Slider";
-import {TodoPage} from "./pages/TodoPage";
 import {NewAlbum} from "./components/NewAlbum/NewAlbum";
 
 
 export const App = () => {
-
     return (
-        <BrowserRouter>
+        <HashRouter basename="/">
             <Provider store={store}>
                 <Layout>
                     <Routes>
@@ -34,6 +33,6 @@ export const App = () => {
                     </Routes>
                 </Layout>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     );
 };

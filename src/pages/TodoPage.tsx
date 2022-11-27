@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch";
+import {useAppSelector} from "../hooks/useAppSelector";
 import {loadTodos} from "../store/actionCreators/todos";
 import {Todos} from "../components/Todo/Todos";
-import {useAppSelector} from "../hooks/useAppSelector";
 import {LoadingBar} from "../components/LoadingBar/LoadingBar";
 import {ShowError} from "../components/ShowError/ShowError";
 

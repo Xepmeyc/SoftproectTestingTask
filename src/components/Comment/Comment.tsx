@@ -1,18 +1,18 @@
 import * as React from 'react';
+import {FC} from "react";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {FC} from "react";
-import {IComment} from "../../types/types";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Button from "@mui/material/Button";
+import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deleteComment} from "../../store/actionCreators/comments";
-import {useAppSelector} from "../../hooks/useAppSelector";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CardActions from "@mui/material/CardActions";
+import {IComment} from "../../types/types";
 
 export const Comment: FC<{comment: IComment}> = ({comment}) => {
     const dispatch = useAppDispatch();

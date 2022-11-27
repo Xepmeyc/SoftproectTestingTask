@@ -1,14 +1,14 @@
 import React, {FC, useEffect, useState} from 'react';
 import {TextField} from "@mui/material";
+import {useNavigate, useParams} from "react-router-dom";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {useAppSelector} from "../../hooks/useAppSelector";
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
-import {INewPost} from "../../types/types";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {addPost, changePost, getCurrentPost, loadPosts} from "../../store/actionCreators/posts";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {useNavigate, useParams} from "react-router-dom";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
+import {INewPost} from "../../types/types";
 
 export const NewOrEditPost: FC = () => {
 

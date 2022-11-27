@@ -1,24 +1,22 @@
 import React, {FC, useState} from 'react';
-import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
-import {INewAlbum} from "../../types/types";
+import SendIcon from "@mui/icons-material/Send";
+import {TextField} from "@mui/material";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {addEmptyAlbum} from "../../store/actionCreators/albums";
-import SendIcon from "@mui/icons-material/Send";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
+import {useNavigate} from "react-router-dom";
+import {INewAlbum} from "../../types/types";
 
 export const NewAlbum:FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [newAlbumTitle, setNewAlbumTitle] = useState("");
+
 
     const newAlbum: INewAlbum = {
         title: "",
         userId: Date.now()
     }
-    const [newAlbumTitle, setNewAlbumTitle] = useState("");
 
     const createNewAlbum = () => {
         newAlbum.title = newAlbumTitle;

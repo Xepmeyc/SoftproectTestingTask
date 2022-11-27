@@ -1,12 +1,11 @@
 import React, {FC} from 'react';
 import {Grid} from "@mui/material";
 import {NavLink} from "react-router-dom";
-import {IAlbum} from "../../types/types";
 import Button from "@mui/material/Button";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deleteAlbum} from "../../store/actionCreators/albums";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
+import {IAlbum} from "../../types/types";
 
 export const Album:FC<{album: IAlbum}> = ({album}) => {
     const dispatch = useAppDispatch();
@@ -31,8 +30,6 @@ export const Album:FC<{album: IAlbum}> = ({album}) => {
                             <Button color="error" onClick={albumDelete} size="small">Delete <DeleteForeverIcon fontSize="small"/></Button>
                         </span>
                     </div>
-
-
                 </div>
         </Grid>
     );

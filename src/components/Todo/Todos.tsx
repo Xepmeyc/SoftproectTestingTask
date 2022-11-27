@@ -1,15 +1,14 @@
-import {Todo} from "./Todo";
-import {List} from "./List";
+import React, {FC, useState} from "react";
 import {
     DragDropContext,
     Draggable,
     DraggableProvided,} from "react-beautiful-dnd";
-import React, {FC, useState} from "react";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {INormalTodo, ITodo} from "../../types/types";
-import {todoDelete, todoUpdate} from "../../store/actionCreators/todos";
 import Button from "@mui/material/Button";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {todoDelete, todoUpdate} from "../../store/actionCreators/todos";
+import {Todo} from "./Todo";
+import {List} from "./List";
+import {INormalTodo, ITodo} from "../../types/types";
 
 
 export const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
@@ -24,7 +23,6 @@ export const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
 
     const [items, setItems] = useState(todos);
     const [currentTodo, setCurrentTodo] = useState(initialTodo);
-    const [todoTitle, setTodoTitle] = useState("");
 
     const removeFromList = (list: Array<ITodo>, index: number, completedStatus: string) => {
         const status = {completed: true, noCompleted: false}
