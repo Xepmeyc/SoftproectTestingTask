@@ -25,9 +25,9 @@ export const AlbumsPage = () => {
 
      return (
         <Box sx={{ flexGrow: 1, p: 2 }}>
-            <NavLink to="create">
-                <Button>Add new empty album</Button>
-            </NavLink>
+            <Button className="createButton" variant="contained">
+                <NavLink to="create"> Add new empty album </NavLink>
+            </Button>
 
             <Grid
                 container

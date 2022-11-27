@@ -23,7 +23,7 @@ export const Posts: FC = () => {
 
     return (
         <div>
-            <Button variant="contained">
+            <Button className="createButton" variant="contained">
                 <NavLink to="create"> New Post </NavLink>
             </Button>
             {posts.map((post) => {

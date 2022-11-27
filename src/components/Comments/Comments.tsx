@@ -32,11 +32,11 @@ export const Comments: FC = () => {
     if (error) return <ShowError error={error}/>
 
     return (
-        <div>
+        <div className="comments">
             {currentPost? <Post post={currentPost} isOpen={true} /> : null}
             {comments.length
             ? null
-            : <Card className="comment">
+            : <Card className="comment noComments" variant="outlined">
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
                             No comments!

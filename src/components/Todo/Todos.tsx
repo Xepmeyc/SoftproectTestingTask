@@ -1,5 +1,5 @@
-import Card from "./Card";
-import List from "./List";
+import {Todo} from "./Todo";
+import {List} from "./List";
 import {
     DragDropContext,
     Draggable,
@@ -8,12 +8,11 @@ import React, {FC, useState} from "react";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {INormalTodo, ITodo} from "../../types/types";
 import {todoDelete, todoUpdate} from "../../store/actionCreators/todos";
-import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
-import {TextField} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 
-const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
+export const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
     const dispatch = useAppDispatch();
 
     const initialTodo:ITodo = {
@@ -97,14 +96,10 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
         return "noCompleted";
     }
 
-    const changeHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTodoTitle(event.target.value);
-    }
-
 
     return (
             <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-                <Button onClick={save} variant="contained" endIcon={<SendIcon />}>
+                <Button className="createButton" variant="contained" onClick={save}>
                     Save
                 </Button>
                 <div className="flex">
@@ -115,16 +110,12 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
                                     provided: DraggableProvided,
                                 ) => (
 
-                                    <div>
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                        >
-                                            <Card data={item}>
-                                                <Button onClick={() => deleteHandle(item)}>Delete</Button>
-                                            </Card>
-                                        </div>
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                    >
+                                        <Todo listName={"noCompleted"} data={item} handleDelete={() => deleteHandle(item)}/>
                                     </div>
                                 )}
                             </Draggable>
@@ -139,9 +130,8 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                     >
-                                        <Card data={item}>
-                                            <Button onClick={() => deleteHandle(item)}>Delete</Button>
-                                        </Card>
+                                        <Todo listName={"completed"} data={item} handleDelete={() => deleteHandle(item)}/>
+
                                     </div>
                                 )}
                             </Draggable>
@@ -151,5 +141,3 @@ const Todos:FC<{todos: INormalTodo }> = ({todos}) => {
             </DragDropContext>
     );
 };
-
-export default Todos;

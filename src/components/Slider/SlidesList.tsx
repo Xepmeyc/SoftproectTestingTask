@@ -7,7 +7,7 @@ export const SlidesList:FC = () => {
 
     return (
         <div
-            className="slide-list"
+            className="slideList"
             style={{ transform: `translateX(-${slideNumber * 100}%)` }}
         >
             {photos.map((slide, index) => (

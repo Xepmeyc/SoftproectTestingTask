@@ -11,6 +11,8 @@ import {deleteComment} from "../../store/actionCreators/comments";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {LoadingBar} from "../LoadingBar/LoadingBar";
 import {ShowError} from "../ShowError/ShowError";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import CardActions from "@mui/material/CardActions";
 
 export const Comment: FC<{comment: IComment}> = ({comment}) => {
     const dispatch = useAppDispatch();
@@ -37,7 +39,9 @@ export const Comment: FC<{comment: IComment}> = ({comment}) => {
 
             </CardContent>
 
-            <Button onClick={commentDelete} size="small">Delete</Button>
+            <CardActions className="panelButton">
+                <Button color="error" onClick={commentDelete} size="small">Delete <DeleteForeverIcon fontSize="small"/></Button>
+            </CardActions>
         </Card>
     );
 }

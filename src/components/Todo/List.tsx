@@ -3,6 +3,7 @@ import {
     Droppable,
     DroppableProvided,
 } from "react-beautiful-dnd";
+import Card from "@mui/material/Card";
 
 interface ListProps {
     children?: React.ReactNode;
@@ -11,24 +12,23 @@ interface ListProps {
     name: string;
 };
 
-const List:FC<ListProps> = ({ children, title, name }) => {
+export const List:FC<ListProps> = ({ children, title, name }) => {
     return (
-        <div className="flex flex-col">
+        <div>
             <h2>{title}</h2>
-            <div>
-                <Droppable droppableId={name}>
-                    {(provided: DroppableProvided) => (
-                        <div ref={provided.innerRef} className="h-screen">
-                            <div className="flex flex-col h-screen">
+            <Card sx={{ maxWidth: 450 }}>
+                <div className={name === "completed"? "completedList": "noCompletedList"}>
+                    <Droppable droppableId={name}>
+                        {(provided: DroppableProvided) => (
+                            <div ref={provided.innerRef}>
                                 {children}
                                 {provided.placeholder}
                             </div>
-                        </div>
-                    )}
-                </Droppable>
-            </div>
+                        )}
+                    </Droppable>
+                </div>
+            </Card>
         </div>
+
     );
 };
-
-export default List;

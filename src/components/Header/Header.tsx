@@ -31,7 +31,7 @@ export const Header: FC = () => {
                     >
                         <NavLink  to="/"> <HomeIcon fontSize="large" /></NavLink>
                     </Typography>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    <Box className="navigationLinks" sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
                             <NavLink key={item.name} to={item.link}>
                                 <Button sx={{ color: '#fff' }}>

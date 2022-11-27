@@ -17,7 +17,7 @@ import {NewAlbum} from "./components/NewAlbum/NewAlbum";
 export const App = () => {
 
     return (
-        <HashRouter basename={"/SoftproectTestingTask/"}>
+        <BrowserRouter>
             <Provider store={store}>
                 <Layout>
                     <Routes>
@@ -34,6 +34,6 @@ export const App = () => {
                     </Routes>
                 </Layout>
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     );
 };

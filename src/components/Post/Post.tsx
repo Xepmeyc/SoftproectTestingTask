@@ -9,6 +9,8 @@ import {IPost} from "../../types/types";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {deletePosts} from "../../store/actionCreators/posts";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 interface IProps {
     post: IPost
@@ -27,24 +29,24 @@ export const Post: FC<IProps> = ({post,isOpen= false}) => {
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography gutterBottom variant="h5">
                     {post.title}
                 </Typography>
-                <Typography variant="h5" component="div">
+                <Typography sx={{ fontSize: 14 }} variant="h5" component="div">
                     {post.body}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className="panelButton">
                 {isOpen
                     ? null
-                    : <NavLink to = {post.id.toString()}>
+                    : <NavLink className="firstButton" to = {post.id.toString()}>
                         <Button size="small">Learn More</Button>
                     </NavLink>}
 
                 <NavLink to ={isOpen? `/posts/edit/${post.id}`: `edit/${post.id}`}>
-                    <Button size="small">Edit</Button>
+                    <Button size="small">Edit <EditIcon fontSize="small"/></Button>
                 </NavLink>
-                <Button onClick={deletePost} size="small">Delete</Button>
+                <Button color="error" onClick={deletePost} size="small">Delete <DeleteForeverIcon fontSize="small"/></Button>
             </CardActions>
         </Card>
     );

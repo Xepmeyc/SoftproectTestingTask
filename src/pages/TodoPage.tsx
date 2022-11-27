@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {loadTodos} from "../store/actionCreators/todos";
-import Todos from "../components/Todo/Todos";
+import {Todos} from "../components/Todo/Todos";
 import {useAppSelector} from "../hooks/useAppSelector";
 import {LoadingBar} from "../components/LoadingBar/LoadingBar";
 import {ShowError} from "../components/ShowError/ShowError";
@@ -19,7 +19,7 @@ export const TodoPage = () => {
     if (error) return <ShowError error={error}/>
 
     return (
-        <div className="flex flex-col items-center bg-gray-100 min-h-screen">
+        <div className="flex flexCol items-center bg-gray-100 min-h-screen">
             <Todos todos={todos}/>
         </div>
     );

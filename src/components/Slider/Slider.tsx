@@ -73,9 +73,9 @@ export const Slider:FC = () => {
 
     return (
         <div className="slider">
-            <Button id="basic-button">
+            <div className="sliderTitle fontBold">
                 {currentAlbum?.title}
-            </Button>
+            </div>
             <SliderContext.Provider
                 value={{
                     goToSlide,

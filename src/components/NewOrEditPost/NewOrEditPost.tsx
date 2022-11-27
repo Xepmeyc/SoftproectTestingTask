@@ -71,27 +71,32 @@ export const NewOrEditPost: FC = () => {
     }
 
     const setInitialState = () => {
+        if (!id){
+            setNewPost(initialState);
+            return
+        }
+
         if (currentPost){
             setNewPost({...newPost, body: currentPost.body, title: currentPost.title})
         }
     }
 
     return (
-        <div>
-            <div className="newPost">
+        <div className="newOrEditPost">
+            <div className="newOrEditPostInput">
                 <TextField
                     name="title"
                     className="newPostInput"
                     id="standard-textarea"
                     label="Post title"
-                    placeholder="Placeholder"
+                    placeholder="Post title"
                     multiline
-                    variant="standard"
+                    variant="outlined"
                     value={newPost.title}
                     onChange={handleChange}
                 />
             </div>
-            <div className="newPost">
+            <div className="newOrEditPostInput">
                 <TextField
                     className="newPostInput"
                     name="body"
@@ -103,20 +108,22 @@ export const NewOrEditPost: FC = () => {
                     onChange={handleChange}
                 />
             </div>
-            <Button onClick={currentPost ? saveEdit: createNewPost} variant="contained" endIcon={<SendIcon />}>
-                Send
-            </Button>
-
-            {currentPost
-                ? <Button onClick={setInitialState} variant="contained" >
-                    Undo
+            <div className="newOrEditButtonPanel">
+                <Button sx = {{mr: "auto"}} onClick={currentPost ? saveEdit: createNewPost} variant="contained" endIcon={<SendIcon />}>
+                    Send
                 </Button>
-                : null
-            }
 
-            <Button onClick={clearPost} variant="contained" >
-                Clear
-            </Button>
+                {currentPost
+                    ? <Button onClick={setInitialState} variant="contained" >
+                        Undo
+                    </Button>
+                    : null
+                }
+
+                <Button sx= {{bgcolor: "error.main"}} onClick={clearPost} variant="contained" >
+                    Clear
+                </Button>
+            </div>
 
             {loading
                 ? <LoadingBar/>

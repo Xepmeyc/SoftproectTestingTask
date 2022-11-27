@@ -2,6 +2,35 @@ body{
     padding: 0;
     margin: 0;
 }
+a{
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+.navigationLinks button:hover{
+    cursor: pointer;
+    color: #acbdd3;
+}
+a:hover{
+    cursor: pointer;
+    color: #acbdd3;
+}
+.createButton{
+    display: flex;
+    width: 100%;
+}
+.createButton a {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+.panelButton{
+    justify-content: right;
+}
 .header{
     margin-bottom: 75px;
 }
@@ -15,9 +44,30 @@ body{
 .comment_header{
     margin-top: 15px;
 }
-.newPost{
+.newOrEditPostInput{
     margin-top: 10px;
     margin-bottom: 20px;
+}
+.newAlbumInput{
+    display: flex;
+    width: 100%;
+}
+.firstButton{
+    margin-right: auto;
+}
+.comments{
+    margin: 10px;
+}
+.noComments{
+    display: flex;
+    justify-content: center;
+}
+.newOrEditPost{
+    margin: 10px;
+}
+.newOrEditButtonPanel{
+    display: flex;
+    justify-content: right;
 }
 .navLink{
     text-align: center;
@@ -25,17 +75,48 @@ body{
     text-decoration: none;
     color: black;
 }
+.albumControl{
+    display: flex;
+    background-color: white;
+    border: 1px solid #1976d2;
+    border-bottom-right-radius: inherit;
+}
+.albumTitle{
+    color: white;
+    margin: auto;
+}
+.sliderTitle{
+    color: #1976d2;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.fontBold button{
+    font-weight: bold;
+}
+.fontBold{
+    font-weight: bold;
+}
+
+.slideTitle{
+
+}
+
 .album{
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
     height: 100%;
     text-align: center;
-    justify-content: center;
     text-decoration: none;
     color: black;
-    border-radius: 15px;
-    background: url("https://i.ibb.co/Xp40YQC/6fec6b8b-948b-4ef6-bfec-6369ee1b55f2.png") no-repeat center;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #1976d2;
     background-size: 100%;
 }
 
@@ -53,24 +134,24 @@ body{
     /* DOTS */
     /* ARROWS */
 }
-.slider .slide-list {
+.slider .slideList {
     display: flex;
     height: 100%;
     transition: transform 0.5s ease-in-out;
     width: 100%;
 }
-.slider .slide-list .slide {
+.slider .slideList .slide {
     flex: 1 0 100%;
     position: relative;
 }
-.slider .slide-list .slide .slide-image {
+.slider .slideList .slide .slideImage {
     display: flex;
     margin: 0 auto;
     max-height: 300px;
     width: 100%;
     object-fit: contain;
 }
-.slider .slide-list .slide .slide-title {
+.slider .slideList .slide .slideTitle {
     text-align: center;
     margin-top: 10px;
 }
@@ -92,7 +173,7 @@ body{
     cursor: pointer;
 }
 .slider .dots .dot.selected {
-    background-color: green;
+    background-color: #1976d2;
 }
 .slider .arrows {
     color: white;
@@ -108,38 +189,44 @@ body{
 .slider .arrows .arrow {
     height: 30px;
     width: 30px;
+    color: #1976d2;
 }
 .slider .arrows .arrow:hover {
     cursor: pointer;
+    color: #acbdd3;
 }
 .slider .arrows .arrow.left {
-    color: black;
     margin-left: 5px;
 }
 .slider .arrows .arrow.right {
-    color: black;
     margin-right: 5px;
 }
 
 /**********************************************************************************/
-
-.bg-gray-100 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246/var(--tw-bg-opacity));
-}
-.items-center {
-    align-items: center;
-}
-.flex-col {
+.flexCol {
     flex-direction: column;
-}
-.min-h-screen {
-    min-height: 100vh;
 }
 .flex {
     display: flex;
+
 }
-.draggable_item{
+/*.noCompletedList {
+    background-color: #1976d2;
+    border: 2px solid white;
+    border-radius: 30px;
+}
+.completedList{
+    background-color: whitesmoke;
+    border: 5px solid #1976d2;
+    border-radius: 30px;
+}*/
+.todo .draggableItem{
     display: flex;
-    border: 1px solid black;
+    justify-content: right;
+    margin-bottom: 7px;
+    height: 50px;
+    cursor: grab;
+}
+.todo .draggableItem span{
+    margin-right: auto;
 }
