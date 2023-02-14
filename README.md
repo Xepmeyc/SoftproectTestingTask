@@ -20,4 +20,4 @@ App published on [gh-pages](https://xepmeyc.github.io/SoftproectTestingTask/)
 - [WebPack](https://www.npmjs.com/package/axios) for building app
 
 ## API
-Data was taken from jsonplaceholder
+Data was taken from [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
