@@ -18,3 +18,6 @@ App published on [gh-pages](https://xepmeyc.github.io/SoftproectTestingTask/)
 - [React-router v6](https://reactrouter.com/en/main) for routing
 - [Axios](https://www.npmjs.com/package/axios) for AJAX requests
 - [WebPack](https://www.npmjs.com/package/axios) for building app
+
+## API
+Data was taken from jsonplaceholder
