@@ -1,6 +1,6 @@
 # SoftproectTestingTask
 
-App App published on [gh-pages](https://xepmeyc.github.io/SoftproectTestingTask/)
+App published on [gh-pages](https://xepmeyc.github.io/SoftproectTestingTask/)
 
 ## Pages
 
@@ -17,3 +17,4 @@ App App published on [gh-pages](https://xepmeyc.github.io/SoftproectTestingTask/
 - [Material UI](https://mui.com/) 
 - [React-router v6](https://reactrouter.com/en/main) for routing
 - [Axios](https://www.npmjs.com/package/axios) for AJAX requests
+- [WebPack](https://www.npmjs.com/package/axios) for building app
